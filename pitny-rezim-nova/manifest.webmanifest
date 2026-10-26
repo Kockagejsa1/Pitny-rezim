@@ -1,16 +1,16 @@
 {
-  "id": "https://kockagejsa1.github.io/Pitny-rezim/pitny-rezim-nova/",
-  "name": "Pitný režim – nová instalace",
-  "short_name": "Pitný režim+",
-  "description": "Samostatná instalace aplikace Pitný režim",
-  "start_url": "./?install=novy-20261026",
+  "id": "https://kockagejsa1.github.io/Pitny-rezim/pitny-rezim-nova/?install_id=pitny-rezim-20261026-2104",
+  "name": "Pitný režim 2026 – nová aplikace",
+  "short_name": "Pitný režim 26",
+  "description": "Nová samostatná instalace aplikace Pitný režim",
+  "start_url": "./?install_id=pitny-rezim-20261026-2104",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f3f9fd",
   "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "icon.svg",
+      "src": "icon.svg?v=20261026-2104",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
@@ -24,7 +24,7 @@
       "url": "./rychle.html",
       "icons": [
         {
-          "src": "icon.svg",
+          "src": "icon.svg?v=20261026-2104",
           "sizes": "any",
           "type": "image/svg+xml"
         }
