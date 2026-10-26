@@ -1,9 +1,9 @@
 {
-  "id": "./",
-  "name": "Pitný režim – samostatná instalace",
-  "short_name": "Pitný režim",
+  "id": "https://kockagejsa1.github.io/Pitny-rezim/samostatne/?app=pitny-rezim-standalone-v2",
+  "name": "Pitný režim – samostatná verze 2",
+  "short_name": "Pitný režim 2",
   "description": "Samostatná instalace aplikace Pitný režim",
-  "start_url": "./",
+  "start_url": "./?app=pitny-rezim-standalone-v2",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f3f9fd",
