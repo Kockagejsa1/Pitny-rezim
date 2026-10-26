@@ -1,9 +1,9 @@
 {
-  "id": "./?app=pitny-rezim-v3-20261026",
+  "id": "./?pwa=pitny-rezim-standalone-20261026-1426",
   "name": "Pitný režim",
   "short_name": "Pitný režim",
   "description": "Jednoduché sledování pitného režimu",
-  "start_url": "./",
+  "start_url": "./?pwa=pitny-rezim-standalone-20261026-1426",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f3f9fd",
