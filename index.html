@@ -9,29 +9,32 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>Pitný režim</title>
 <style>
-:root{color-scheme:light;--blue:#1689e8;--deep:#0869bd;--pale:#eaf6ff;--ink:#15324b;--muted:#64788a}
-*{box-sizing:border-box}body{margin:0;background:#f3f9fd;color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+:root{color-scheme:light;--blue:#1689e8;--deep:#0869bd;--pale:#eaf6ff;--ink:#15324b;--muted:#64788a;--page:#f3f9fd;--surface:#fff;--border:#d8e8f4;--track:#e4f1fa;--tag:#eaf6ff}
+body.dark{color-scheme:dark;--ink:#e6eef7;--muted:#a8b8c8;--page:#101923;--surface:#1b2836;--border:#334657;--track:#293b4b;--tag:#263c50}
+body.dark .card{box-shadow:0 8px 28px #0003}body.dark .secondary{background:#223242;color:var(--ink);border-color:var(--border)}body.dark .history li{border-color:#2b3b4a}body.dark .history button{background:var(--tag)!important;color:var(--ink)!important}body.dark .track{background:var(--track)}
+
+*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
 main{width:min(100%,480px);margin:auto;padding:20px 18px 32px}
 header{display:flex;align-items:center;gap:12px;padding:10px 2px 24px}
 header img{width:54px;height:54px}h1{font-size:25px;margin:0;font-weight:800}header p{margin:3px 0 0;color:var(--muted);font-size:14px}
-.card{background:white;border-radius:24px;padding:22px;box-shadow:0 8px 28px #1d5b8010;margin-bottom:16px}
+.card{background:var(--surface);border-radius:24px;padding:22px;box-shadow:0 8px 28px #1d5b8010;margin-bottom:16px}
 .label{color:var(--muted);font-size:14px;font-weight:650}.total{font-size:42px;font-weight:850;letter-spacing:-1.5px;margin:6px 0 0}.total span{font-size:18px;letter-spacing:0;color:var(--muted);font-weight:650}
-.track{height:12px;background:#e4f1fa;border-radius:20px;overflow:hidden;margin:18px 0 10px}.fill{height:100%;width:0;background:linear-gradient(90deg,#52b9ff,#0875d1);border-radius:20px;transition:width .25s}
+.track{height:12px;background:var(--track);border-radius:20px;overflow:hidden;margin:18px 0 10px}.fill{height:100%;width:0;background:linear-gradient(90deg,#52b9ff,#0875d1);border-radius:20px;transition:width .25s}
 .row{display:flex;justify-content:space-between;gap:10px;font-size:14px;color:var(--muted)}
 .add{border:0;width:100%;border-radius:22px;background:var(--blue);color:white;padding:19px 16px;font-size:23px;font-weight:800;box-shadow:0 7px 0 var(--deep);cursor:pointer;touch-action:manipulation}
 .add:active{transform:translateY(3px);box-shadow:0 4px 0 var(--deep)}.add small{display:block;font-size:13px;font-weight:600;opacity:.9;margin-top:3px}
-.actions{display:flex;gap:10px;margin-top:16px}.secondary{flex:1;border:1px solid #d8e8f4;background:#f8fcff;color:var(--ink);padding:12px;border-radius:13px;font-weight:700;font-size:14px}
+.actions{display:flex;gap:10px;margin-top:16px}.secondary{flex:1;border:1px solid #d8e8f4;background:var(--surface);color:var(--ink);padding:12px;border-radius:13px;font-weight:700;font-size:14px}
 h2{font-size:18px;margin:0 0 14px}.history{list-style:none;padding:0;margin:0}.history li{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #edf3f7}.history li:last-child{border-bottom:0}.history strong{font-size:15px}.history span{color:var(--muted);font-size:14px}.empty{color:var(--muted);font-size:14px}.note{text-align:center;color:var(--muted);font-size:12px;padding:4px 12px}
 </style>
 </head>
 <body>
 <main>
-<header><img src="icon.svg" alt=""><div><h1>Pitný režim</h1><p>Každá sklenice se počítá 💧</p></div></header>
+<header><img src="icon.svg" alt=""><div style="flex:1"><h1>Pitný režim</h1><p>Každá sklenice se počítá 💧</p></div><button class="secondary" id="settingsToggle" type="button" style="flex:0 0 auto">⚙️ Nastavení</button></header><section class="card" id="settingsPanel" hidden><h2>Nastavení</h2><label for="goalInput" class="label">Celkový denní cíl (ml)</label><div class="actions" style="margin-top:8px"><input id="goalInput" type="number" min="250" max="10000" step="50" style="min-width:0;flex:1;border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--surface);color:var(--ink)"><button class="secondary" id="saveGoal" type="button">Uložit cíl</button></div><div style="margin-top:16px"><div class="label" style="margin-bottom:8px">Vzhled aplikace</div><div class="actions" style="margin-top:0"><button class="secondary" id="lightTheme" type="button">☀️ Světlý režim</button><button class="secondary" id="darkTheme" type="button">🌙 Tmavý režim</button></div></div></section>
 <section class="card" aria-live="polite">
 <div class="label">Dnes jsi vypil</div>
 <div class="total"><span id="total">0</span> <span>ml</span></div>
 <div class="track" role="progressbar" aria-label="Plnění denního cíle" aria-valuemin="0" aria-valuemax="2500" aria-valuenow="0"><div class="fill" id="fill"></div></div>
-<div class="row"><span id="remaining">Zbývá 2 500 ml</span><span id="goalLabel">Cíl 2 500 ml</span></div><button class="secondary" id="setGoal" type="button" style="width:100%;margin-top:14px">⚙️ Změnit denní cíl</button>
+<div class="row"><span id="remaining">Zbývá 2 500 ml</span><span id="goalLabel">Cíl 2 500 ml</span></div>
 </section>
 <button class="add" id="add" type="button">＋ 250 ml<small>Přidat sklenici vody</small></button>
 <div class="actions"><button class="secondary" id="undo" type="button">↶ Vrátit poslední</button><button class="secondary" id="reset" type="button">Nový den / opravit</button></div>
@@ -39,7 +42,7 @@ h2{font-size:18px;margin:0 0 14px}.history{list-style:none;padding:0;margin:0}.h
 <p class="note">Údaje se ukládají v tomto telefonu a prohlížeči.</p>
 </main>
 <script>
-const KEY='pitny-rezim-v1';const GOAL_KEY='pitny-rezim-daily-goal';let GOAL=2500;try{const savedGoal=Number(localStorage.getItem(GOAL_KEY));if(Number.isFinite(savedGoal)&&savedGoal>0)GOAL=savedGoal}catch{}let state;
+const KEY='pitny-rezim-v1';const GOAL_KEY='pitny-rezim-daily-goal';const THEME_KEY='pitny-rezim-theme';let GOAL=2500;try{const savedGoal=Number(localStorage.getItem(GOAL_KEY));if(Number.isFinite(savedGoal)&&savedGoal>0)GOAL=savedGoal}catch{}let state;
 function dayKey(d=new Date()){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 function blank(){return {days:{},lastDay:dayKey()}}
 function load(){try{return JSON.parse(localStorage.getItem(KEY))||blank()}catch{return blank()}}
@@ -51,7 +54,7 @@ function timeOf(e){if(!e.time)return 'čas nezaznamenán';return new Date(e.time
 function render(){const t=today(),n=t.total||0,p=Math.min(100,n/GOAL*100);document.getElementById('total').textContent=fmt(n);document.getElementById('fill').style.width=p+'%';document.querySelector('[role=progressbar]').setAttribute('aria-valuemax',GOAL);document.querySelector('[role=progressbar]').setAttribute('aria-valuenow',Math.min(n,GOAL));document.getElementById('goalLabel').textContent='Cíl '+fmt(GOAL)+' ml';document.getElementById('remaining').textContent=n>=GOAL?'Denní cíl splněn! 🎉':'Zbývá '+fmt(GOAL-n)+' ml';const keys=Object.keys(state.days).sort().reverse();const list=document.getElementById('history');list.innerHTML='';keys.slice(0,14).forEach(k=>{const d=state.days[k];const li=document.createElement('li');li.style.display='block';li.style.padding='14px 0';const head=document.createElement('div');head.style.display='flex';head.style.justifyContent='space-between';const strong=document.createElement('strong');strong.textContent=(k===dayKey()?'Dnes · ': '')+k.split('-').reverse().join('. ');const span=document.createElement('span');span.textContent=fmt(d.total||0)+' ml';head.append(strong,span);li.append(head);const entries=document.createElement('div');entries.style.cssText='display:flex;flex-wrap:wrap;gap:6px;margin-top:8px';(d.entries||[]).slice().reverse().forEach(e=>{const tag=document.createElement('button');tag.type='button';tag.style.cssText='background:#eaf6ff;border:0;border-radius:9px;padding:7px 9px;color:#15324b;font-size:13px;cursor:pointer';tag.textContent=timeOf(e)+' · '+fmt(e.amount||250)+' ml · Upravit';tag.addEventListener('click',()=>editEntry(k,(d.entries||[]).indexOf(e)));entries.append(tag)});li.append(entries);list.append(li)});document.getElementById('empty').hidden=keys.length>0}
 function addWater(){const t=today();t.entries=t.entries||[];t.entries.push({amount:250,time:new Date().toISOString()});t.total=(t.total||0)+250;save();render()}
 function editEntry(day,index){const d=state.days[day];if(!d||!d.entries||!d.entries[index])return;const e=d.entries[index];const oldTime=e.time?new Date(e.time):new Date(day+'T12:00:00');const amount=prompt('Množství v ml:',String(e.amount||250));if(amount===null)return;const ml=Number(amount);if(!Number.isFinite(ml)||ml<=0){alert('Zadej kladné množství v ml.');return}const pad=n=>String(n).padStart(2,'0');const localVal=oldTime.getFullYear()+'-'+pad(oldTime.getMonth()+1)+'-'+pad(oldTime.getDate())+'T'+pad(oldTime.getHours())+':'+pad(oldTime.getMinutes());const dt=prompt('Datum a čas (RRRR-MM-DDTHH:MM):',localVal);if(dt===null)return;const parsed=new Date(dt);if(Number.isNaN(parsed.getTime())){alert('Datum nebo čas není platný.');return}d.total=Math.max(0,(d.total||0)-(e.amount||250));d.entries.splice(index,1);if(d.entries.length===0&&d.total===0)delete state.days[day];const newDay=dayKey(parsed);if(!state.days[newDay])state.days[newDay]={total:0,entries:[]};const nd=state.days[newDay];nd.entries=nd.entries||[];nd.entries.push({amount:ml,time:parsed.toISOString()});nd.total=(nd.total||0)+ml;save();render()}
-document.getElementById('add').addEventListener('click',addWater);document.getElementById('setGoal').addEventListener('click',()=>{const value=prompt('Nastav celkový denní cíl pití v mililitrech:',String(GOAL));if(value===null)return;const next=Number(value);if(!Number.isFinite(next)||next<250||next>10000){alert('Zadej cíl od 250 do 10 000 ml.');return}GOAL=Math.round(next);localStorage.setItem(GOAL_KEY,String(GOAL));render()});
+document.getElementById('settingsToggle').addEventListener('click',()=>{const panel=document.getElementById('settingsPanel');panel.hidden=!panel.hidden;if(!panel.hidden)document.getElementById('goalInput').value=GOAL});document.getElementById('saveGoal').addEventListener('click',()=>{const next=Number(document.getElementById('goalInput').value);if(!Number.isFinite(next)||next<250||next>10000){alert('Zadej cíl od 250 do 10 000 ml.');return}GOAL=Math.round(next);localStorage.setItem(GOAL_KEY,String(GOAL));render();alert('Denní cíl byl uložen.')});function applyTheme(theme){document.body.classList.toggle('dark',theme==='dark');localStorage.setItem(THEME_KEY,theme);document.querySelector('meta[name=theme-color]').content=theme==='dark'?'#101923':'#ffffff'}document.getElementById('lightTheme').addEventListener('click',()=>applyTheme('light'));document.getElementById('darkTheme').addEventListener('click',()=>applyTheme('dark'));try{applyTheme(localStorage.getItem(THEME_KEY)||'light')}catch{}document.getElementById('add').addEventListener('click',addWater);
 document.getElementById('undo').addEventListener('click',()=>{const t=today();if(t.entries&&t.entries.length){const e=t.entries.pop();t.total=Math.max(0,(t.total||0)-(typeof e==='number'?e:(e.amount||250)));save();render()}});
 document.getElementById('reset').addEventListener('click',()=>{const t=today();if(confirm('Opravdu vynulovat dnešní součet?')){t.total=0;t.entries=[];save();render()}});
 
