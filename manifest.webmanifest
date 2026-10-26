@@ -1,0 +1,14 @@
+{
+  "id": "./",
+  "name": "Pitný režim",
+  "short_name": "Pitný režim",
+  "description": "Jednoduché sledování pitného režimu",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f9fd",
+  "theme_color": "#ffffff",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
