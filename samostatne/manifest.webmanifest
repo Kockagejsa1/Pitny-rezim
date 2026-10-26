@@ -1,0 +1,34 @@
+{
+  "id": "./",
+  "name": "Pitný režim – samostatná instalace",
+  "short_name": "Pitný režim",
+  "description": "Samostatná instalace aplikace Pitný režim",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f3f9fd",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Přidat 250 ml",
+      "short_name": "+250 ml",
+      "description": "Zaznamenat sklenici vody",
+      "url": "./rychle.html",
+      "icons": [
+        {
+          "src": "icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
+  ]
+}
