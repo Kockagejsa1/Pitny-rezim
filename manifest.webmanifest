@@ -9,6 +9,26 @@
   "background_color": "#f3f9fd",
   "theme_color": "#ffffff",
   "icons": [
-    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Přidat 250 ml",
+      "short_name": "+250 ml",
+      "description": "Zaznamenat sklenici vody",
+      "url": "./rychle.html",
+      "icons": [
+        {
+          "src": "icon.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
+    }
   ]
 }
