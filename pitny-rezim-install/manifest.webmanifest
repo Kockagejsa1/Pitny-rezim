@@ -1,11 +1,12 @@
 {
-  "id": "https://kockagejsa1.github.io/Pitny-rezim/pitny-rezim-install/",
+  "id": "/Pitny-rezim/pitny-rezim-install/?app_id=pitny-rezim-install-20261027-v2",
   "name": "Pitný režim – samostatná instalace",
   "short_name": "Pitný režim nový",
   "description": "Samostatně instalovatelná aplikace pro sledování pití vody",
-  "start_url": "/Pitny-rezim/pitny-rezim-install/",
+  "start_url": "/Pitny-rezim/pitny-rezim-install/?app_id=pitny-rezim-install-20261027-v2",
   "scope": "/Pitny-rezim/pitny-rezim-install/",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#f3f9fd",
   "theme_color": "#ffffff",
   "icons": [
